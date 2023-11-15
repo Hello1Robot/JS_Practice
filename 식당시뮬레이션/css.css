@@ -1,0 +1,45 @@
+body {
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+.main-container {
+  display: flex;
+  height: 98vh;
+}
+.order-container {
+  border: 1px solid #123456;
+  overflow: auto;
+  margin-left: 10px;
+  flex: 1;
+}
+.cook-container {
+  border: 1px solid #123456;
+  overflow: auto;
+  margin-left: 10px;
+  flex: 1;
+}
+.serve-container {
+  border: 1px solid #123456;
+  overflow: auto;
+  margin-left: 10px;
+  flex: 1;
+}
+.result-container {
+  border: 1px solid #123456;
+  overflow: auto;
+  margin-left: 10px;
+  flex: 1;
+}
+
+.table {
+  width: 100%;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+}
+
+#orderBtns {
+  margin: 5px;
+}

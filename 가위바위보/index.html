@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>가위바위보 게임</h1>
+    <img src="가위바위보.gif" alt="가위바위보" id="default_img">
+    <div class="img-container" id="img-container">
+      <img src="" alt="" id="user_result">
+      <img src="" alt="" id="computer_result">
+    </div>
+    <div class="radio-container">
+      <input type="radio" name="유저" id="gbb" value="0"> 가위
+      <input type="radio" name="유저" id="gbb" value="1"> 바위
+      <input type="radio" name="유저" id="gbb" value="2"> 보
+      <button onclick="gbb()">확인</button>
+    </div>
+    <h2 id="selected"></h2>
+    <h1 id="result"></h1>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+
+</html>

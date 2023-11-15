@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <h1 class="title">🥩강식당</h1>
+  <div class="main-container">
+    <div class="order-container">
+      <h1 class="title">주문</h1>
+      <div id="orderBtns">
+        <button value="순댓국">순댓국</button>
+        <button value="해장국">해장국</button>
+      </div>
+      <table class="table">
+        <thead>
+          <div>
+            <tr>
+              <th>주문번호</th>
+              <th>주문명</th>
+              <th>상태</th>
+            </tr>
+          </div>
+        </thead>
+        <tbody id="orders">
+
+        </tbody>
+      </table>
+    </div>
+    <div class="cook-container">
+      <h1 class="title">요리사</h1>
+      <table class="table">
+        <thead>
+          <div>
+            <tr>
+              <th>이름</th>
+              <th>상태</th>
+              <th>요리</th>
+            </tr>
+          </div>
+        </thead>
+        <tbody id="chefs">
+
+        </tbody>
+      </table>
+    </div>
+    <div class="serve-container">
+      <h1 class="title">서빙</h1>
+      <table class="table">
+        <thead>
+          <div>
+            <tr>
+              <th>이름</th>
+              <th>상태</th>
+              <th>요리</th>
+            </tr>
+          </div>
+        </thead>
+        <tbody id="serves">
+
+        </tbody>
+      </table>
+    </div>
+    <div class="result-container">
+      <h1 class="title">결과</h1>
+      <table class="table">
+        <thead>
+          <div>
+            <tr>
+              <th>주문번호</th>
+              <th>주문명</th>
+            </tr>
+          </div>
+        </thead>
+        <tbody id="results">
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <script src="js.js"></script>
+</body>
+
+</html>
