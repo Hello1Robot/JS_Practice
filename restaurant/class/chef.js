@@ -75,7 +75,6 @@ export function findRemainChef() {
 }
 
 export function startCook(chef, order) {
-  console.log(chef);
   return chef.cook(order);
 }
 
