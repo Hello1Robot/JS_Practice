@@ -62,8 +62,48 @@ class Sticker {
                     stickerItem.remove();
                 }
             })
-
             sticker.appendChild(content);
+
+            content.addEventListener("mousedown", (e) => {
+                const stickerItem = e.currentTarget;
+                let shiftX = e.clientX - stickerItem.getBoundingClientRect().left;
+                let shiftY = e.clientY - stickerItem.getBoundingClientRect().top;
+
+                stickerItem.style.position = "absolute";
+                // stickerItem.style.zIndex = max_zidx++;
+
+                function moveAt(pageX, pageY) {
+                    // 이동한 위치에 사용자가 클릭한 shift를 반영하여 위치 수정해주기
+                    stickerItem.style.left = pageX - shiftX + "px";
+                    stickerItem.style.top = pageY - shiftY + "px";
+                }
+
+                function onMouseMove(event) {
+                    moveAt(event.pageX, event.pageY);
+                }
+
+
+                // 해당 위치로 이동
+                moveAt(e.pageX, e.pageY);
+
+                // mosemove = 해당 위치로 마우스 움직이기
+                document.addEventListener("mousemove", onMouseMove);
+
+                // mouseup이 되면, 기존 함수 삭제하기
+                stickerItem.addEventListener("mouseup", () => {
+                    document.removeEventListener("mousemove", onMouseMove);
+                });
+
+                stickerItem.addEventListener("dragend", () => {
+                    document.removeEventListener("mousemove", onMouseMove);
+                });
+
+
+
+
+            });
+
+
         })
 
 
