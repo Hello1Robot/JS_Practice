@@ -1,0 +1,11 @@
+.sticker {
+    width: 300px;
+    min-height: 400px;
+    padding: 10px 20px 10px 20px;
+    position: absolute;
+    border-radius: 5%;
+}
+
+.sticker-item {
+    margin: 3px;
+}
