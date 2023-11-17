@@ -38,6 +38,7 @@ createStickerBtn.addEventListener("click", () => {
         const sticker = event.target.parentNode;
         sticker.remove();
     });
+
     item.appendChild(deleteBtn);
 
     // Sticker Contents 추가

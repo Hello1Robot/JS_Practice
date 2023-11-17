@@ -53,6 +53,16 @@ class Sticker {
             deleteBtn.innerText = "삭제";
             content.appendChild(deleteBtn);
 
+            // 텍스트 수정 및 삭제 버튼 기능 구현
+            content.addEventListener("click", (e) => {
+                if (e.target.tagName === "BUTTON") {
+                    const stickerItem = e.target.parentNode;
+                    const id = +(stickerItem.id.replace("StickerItem", ""));
+                    this.stickerItemList = this.stickerItemList.filter((item) => +item.index != id);
+                    stickerItem.remove();
+                }
+            })
+
             sticker.appendChild(content);
         })
 
