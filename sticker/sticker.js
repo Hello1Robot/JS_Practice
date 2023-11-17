@@ -43,9 +43,9 @@ class Sticker {
             content.classList.add("sticker-item");
             content.id = "StickerItem" + item.index;
 
-            const textBox = document.createElement("input");
+            const textBox = document.createElement("div");
             textBox.classList.add("itemContent");
-            textBox.value = item.content;
+            textBox.innerText = item.content;
             content.appendChild(textBox);
 
             const deleteBtn = document.createElement("button");

@@ -3,6 +3,8 @@ import { createSticker, getSticker } from "./sticker.js";
 const createStickerBtn = document.getElementById("createSticker");
 const stickerField = document.getElementById("stickerField");
 
+let max_zidx = 1;
+
 createStickerBtn.addEventListener("click", () => {
     console.log("Create Sticker")
     const sticker = createSticker();
@@ -10,6 +12,8 @@ createStickerBtn.addEventListener("click", () => {
     item.id = "Sticker" + sticker.index;
     item.classList.add("sticker");
     item.style.backgroundColor = sticker.rgb;
+    item.style.zIndex = max_zidx++;
+    console.log(item.style.zIndex);
     item.style.left = sticker.x + "px";
     item.style.top = sticker.y + "px";
     // id 추가
@@ -63,12 +67,10 @@ createStickerBtn.addEventListener("click", () => {
         let shiftX = e.clientX - sticker.getBoundingClientRect().left;
         let shiftY = e.clientY - sticker.getBoundingClientRect().top;
 
-
-        sticker.style.zIndex = 1000;
-
-        moveAt(e.pageX, e.pageY);
+        sticker.style.zIndex = max_zidx++;
 
         function moveAt(pageX, pageY) {
+            // 이동한 위치에 사용자가 클릭한 shift를 반영하여 위치 수정해주기
             sticker.style.left = pageX - shiftX + "px";
             sticker.style.top = pageY - shiftY + "px";
         }
@@ -77,12 +79,25 @@ createStickerBtn.addEventListener("click", () => {
             moveAt(event.pageX, event.pageY);
         }
 
+
+        // 해당 위치로 이동
+        moveAt(e.pageX, e.pageY);
+
+        // mosemove = 해당 위치로 마우스 움직이기
         document.addEventListener("mousemove", onMouseMove);
 
-        sticker.onmouseup = function () {
+        // mouseup이 되면, 기존 함수 삭제하기
+        sticker.addEventListener("mouseup", () => {
             document.removeEventListener("mousemove", onMouseMove);
-            sticker.onmouseup = null;
-        };
+        });
+
+        sticker.addEventListener("dragend", () => {
+            document.removeEventListener("mousemove", onMouseMove);
+        });
+
+
+
+
     });
 
 
