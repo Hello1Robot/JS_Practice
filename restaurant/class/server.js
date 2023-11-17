@@ -56,10 +56,6 @@ function updateServeList() {
   }
 }
 
-
-
-
-
 function updateResultList() {
   $result_list.innerHTML = '';
 
@@ -98,7 +94,6 @@ export function findRemainServe() {
 export function startServe(server, order) {
   return server.serve(order);
 }
-
 
 const serves = [new Server("서빙로봇1", 1000), new Server("서빙로봇2", 2000)];
 const results = [];
