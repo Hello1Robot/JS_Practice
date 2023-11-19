@@ -69,8 +69,7 @@ class Sticker {
                 let shiftX = e.clientX - stickerItem.getBoundingClientRect().left;
                 let shiftY = e.clientY - stickerItem.getBoundingClientRect().top;
 
-                stickerItem.style.position = "absolute";
-                // stickerItem.style.zIndex = max_zidx++;
+                stickerItem.style.position = "fixed";
 
                 function moveAt(pageX, pageY) {
                     // 이동한 위치에 사용자가 클릭한 shift를 반영하여 위치 수정해주기
