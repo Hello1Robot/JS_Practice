@@ -90,12 +90,38 @@ class Sticker {
                 // 해당 위치로 이동
                 moveAt(e.pageX, e.pageY);
 
+                function checkMove() {
+
+                }
+
                 // mosemove = 해당 위치로 마우스 움직이기
                 document.addEventListener("mousemove", onMouseMove);
 
                 // mouseup이 되면, 기존 함수 삭제하기
-                stickerItem.addEventListener("mouseup", () => {
+                stickerItem.addEventListener("mouseup", (e) => {
                     document.removeEventListener("mousemove", onMouseMove);
+                    stickerItem.style.zIndex = "";
+                    const targetSticker = document.elementsFromPoint(e.pageX, e.pageY).find(element => element.matches("div#Sticker1.sticker"));
+
+                    if (targetSticker) {
+                        // 옮길 대상 : item (순회중)
+                        const targetStickerIndex = +(targetSticker.id.replace("Sticker", ""));
+                        const targetStickerInstance = getSticker(targetStickerIndex);
+                        const sourceSticker = stickerItem.closest(".sticker");
+                        const sourceStickerIndex = +(sourceSticker.id.replace("Sticker", ""));
+                        const sourceStickerInstance = getSticker(sourceStickerIndex);
+
+                        sourceStickerInstance.stickerItemList = sourceStickerInstance.stickerItemList.filter((targetItem) => targetItem.index != item.index);
+                        targetStickerInstance.stickerItemList.push(item);
+                        this.stickerItemRender();
+                        targetStickerInstance.stickerItemRender();
+                    }
+                    else {
+                        stickerItem.style.left = startX + "px";
+                        stickerItem.style.top = startY + "px";
+                        this.stickerItemRender();
+                    }
+
                 });
 
                 stickerItem.addEventListener("dragend", (e) => {
