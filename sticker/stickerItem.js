@@ -6,7 +6,7 @@ export class StickerItem {
 
     constructor(content) {
         this.index = index++;
-        this.content = content;
+        this.content = content + this.index;
     }
 
 }

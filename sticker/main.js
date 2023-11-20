@@ -5,6 +5,11 @@ const stickerField = document.getElementById("stickerField");
 
 let max_zidx = 1;
 
+export function setZIndex() {
+    console.log(max_zidx)
+    return max_zidx++;
+}
+
 createStickerBtn.addEventListener("click", () => {
     console.log("Create Sticker")
     const sticker = createSticker();
@@ -12,7 +17,7 @@ createStickerBtn.addEventListener("click", () => {
     item.id = "Sticker" + sticker.index;
     item.classList.add("sticker");
     item.style.backgroundColor = sticker.rgb;
-    item.style.zIndex = max_zidx++;
+    item.style.zIndex = setZIndex();
     console.log(item.style.zIndex);
     item.style.left = sticker.x + "px";
     item.style.top = sticker.y + "px";
@@ -67,7 +72,7 @@ createStickerBtn.addEventListener("click", () => {
         let shiftX = e.clientX - sticker.getBoundingClientRect().left;
         let shiftY = e.clientY - sticker.getBoundingClientRect().top;
 
-        sticker.style.zIndex = max_zidx++;
+        sticker.style.zIndex = setZIndex();
 
         function moveAt(pageX, pageY) {
             // 이동한 위치에 사용자가 클릭한 shift를 반영하여 위치 수정해주기

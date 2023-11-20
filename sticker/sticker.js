@@ -1,4 +1,5 @@
 import { StickerItem } from './stickerItem.js';
+import { setZIndex } from './main.js';
 
 let now_x = 50;
 let now_y = 50;
@@ -43,7 +44,7 @@ class Sticker {
             content.classList.add("sticker-item");
             content.id = "StickerItem" + item.index;
 
-            const textBox = document.createElement("div");
+            const textBox = document.createElement("span");
             textBox.classList.add("itemContent");
             textBox.innerText = item.content;
             content.appendChild(textBox);
@@ -54,7 +55,8 @@ class Sticker {
             content.appendChild(deleteBtn);
 
             // 텍스트 수정 및 삭제 버튼 기능 구현
-            content.addEventListener("click", (e) => {
+            content.addEventListener("mousedown", (e) => {
+                e.stopPropagation();
                 if (e.target.tagName === "BUTTON") {
                     const stickerItem = e.target.parentNode;
                     const id = +(stickerItem.id.replace("StickerItem", ""));
@@ -66,8 +68,11 @@ class Sticker {
 
             content.addEventListener("mousedown", (e) => {
                 const stickerItem = e.currentTarget;
-
-                stickerItem.style.zIndex = "1000";
+                const mother = stickerItem.parentNode;
+                const max_idx = setZIndex();
+                mother.style.zIndex = max_idx;
+                stickerItem.style.zIndex = max_idx;
+                console.log(mother);
                 let shiftX = e.clientX - stickerItem.getBoundingClientRect().left;
                 let shiftY = e.clientY - stickerItem.getBoundingClientRect().top;
 
@@ -100,16 +105,20 @@ class Sticker {
                 // mouseup이 되면, 기존 함수 삭제하기
                 stickerItem.addEventListener("mouseup", (e) => {
                     document.removeEventListener("mousemove", onMouseMove);
-                    stickerItem.style.zIndex = "";
-                    const targetSticker = document.elementsFromPoint(e.pageX, e.pageY).find(element => element.matches("div#Sticker1.sticker"));
-
+                    // stickerItem.style.zIndex = "";
+                    const targetSticker = document.elementsFromPoint(e.pageX, e.pageY).find(element => element.className === "sticker");
+                    console.log(targetSticker);
                     if (targetSticker) {
                         // 옮길 대상 : item (순회중)
+
                         const targetStickerIndex = +(targetSticker.id.replace("Sticker", ""));
                         const targetStickerInstance = getSticker(targetStickerIndex);
-                        const sourceSticker = stickerItem.closest(".sticker");
+                        const sourceSticker = stickerItem.parentNode.parentNode;
                         const sourceStickerIndex = +(sourceSticker.id.replace("Sticker", ""));
+                        console.log(sourceSticker);
                         const sourceStickerInstance = getSticker(sourceStickerIndex);
+
+
 
                         sourceStickerInstance.stickerItemList = sourceStickerInstance.stickerItemList.filter((targetItem) => targetItem.index != item.index);
                         targetStickerInstance.stickerItemList.push(item);
