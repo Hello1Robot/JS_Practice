@@ -66,8 +66,13 @@ class Sticker {
 
             content.addEventListener("mousedown", (e) => {
                 const stickerItem = e.currentTarget;
+
+                stickerItem.style.zIndex = "1000";
                 let shiftX = e.clientX - stickerItem.getBoundingClientRect().left;
                 let shiftY = e.clientY - stickerItem.getBoundingClientRect().top;
+
+                const startX = e.pageX - shiftX;
+                const startY = e.pageY - shiftY;
 
                 stickerItem.style.position = "fixed";
 
@@ -93,8 +98,29 @@ class Sticker {
                     document.removeEventListener("mousemove", onMouseMove);
                 });
 
-                stickerItem.addEventListener("dragend", () => {
+                stickerItem.addEventListener("dragend", (e) => {
                     document.removeEventListener("mousemove", onMouseMove);
+                    const targetSticker = document.elementsFromPoint(e.pageX, e.pageY).find(element => element.matches("div#Sticker1.sticker"));
+                    stickerItem.style.zIndex = "";
+                    if (targetSticker) {
+                        // 옮길 대상 : item (순회중)
+                        const targetStickerIndex = +(targetSticker.id.replace("Sticker", ""));
+                        const targetStickerInstance = getSticker(targetStickerIndex);
+                        const sourceSticker = stickerItem.closest(".sticker");
+                        const sourceStickerIndex = +(sourceSticker.id.replace("Sticker", ""));
+                        const sourceStickerInstance = getSticker(sourceStickerIndex);
+
+                        sourceStickerInstance.stickerItemList = sourceStickerInstance.stickerItemList.filter((targetItem) => targetItem.index != item.index);
+                        targetStickerInstance.stickerItemList.push(item);
+                        this.stickerItemRender();
+                        targetStickerInstance.stickerItemRender();
+                    }
+                    else {
+                        stickerItem.style.left = startX + "px";
+                        stickerItem.style.top = startY + "px";
+                        this.stickerItemRender();
+                    }
+
                 });
 
 
